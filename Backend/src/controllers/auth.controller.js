@@ -9,6 +9,9 @@ const getJsonWebToken = async (user,res,message) => {
     const token = jwt.sign(
         {
             id: user.rows[0].id,
+            username: user.rows[0].username,
+            email: user.rows[0].email,
+            role: user.rows[0].role
         },
         process.env.JWT_SECRET,
         {
@@ -23,6 +26,8 @@ const getJsonWebToken = async (user,res,message) => {
             id: user.rows[0].id,
             username: user.rows[0].username,
             email: user.rows[0].email,
+            address: user.rows[0].address,
+            role: user.rows[0].role
         }
     })
 }

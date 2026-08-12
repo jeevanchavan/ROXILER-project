@@ -27,6 +27,7 @@ export const authUser = async (req, res, next) => {
 
         // new property 
         req.user = decoded;
+        console.log("Logged in user:", req.user);
         next();
     } catch (error) {
         return res.status(401).json({
