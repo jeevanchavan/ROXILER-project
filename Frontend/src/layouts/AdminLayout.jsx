@@ -71,15 +71,13 @@ const AdminLayout = () => {
 
         {/* Sidebar Footer - Profile & Logout */}
         <div className="p-4 border-t border-gray-200 space-y-2">
-          <button
-            onClick={() => {
-              setShowProfileModal(true);
-              setSidebarOpen(false);
-            }}
-            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded font-medium border border-gray-200 cursor-pointer"
+          <Link
+            to="/profile"
+            onClick={() => setSidebarOpen(false)}
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded font-medium border border-gray-200 cursor-pointer"
           >
             Profile
-          </button>
+          </Link>
           <button
             onClick={onLogout}
             className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded font-medium border border-red-200 cursor-pointer"
