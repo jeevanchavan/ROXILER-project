@@ -10,10 +10,13 @@ const Login = () => {
 
     useEffect(() => {
         if (user) {
-            if (user.role === "admin") {
+            const role = (user.role || "").toLowerCase();
+            if (role === "admin") {
                 navigate("/admin/dashboard", { replace: true });
-            } else if (user.role === "store_owner") {
+            } else if (role === "store_owner") {
                 navigate("/owner/dashboard", { replace: true });
+            } else {
+                navigate("/stores", { replace: true });
             }
         }
     }, [user, navigate]);
@@ -134,12 +137,13 @@ const Login = () => {
                 email: loginData.email,
                 password: loginData.password,
             });
-            if (loggedInUser?.role === "admin") {
+            const role = (loggedInUser?.role || "").toLowerCase();
+            if (role === "admin") {
                 navigate("/admin/dashboard");
-            } else if (loggedInUser?.role === "store_owner") {
+            } else if (role === "store_owner") {
                 navigate("/owner/dashboard");
             } else {
-                navigate("/");
+                navigate("/stores");
             }
         } catch (err) {
             setErrors((prev) => ({

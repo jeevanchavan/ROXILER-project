@@ -13,6 +13,9 @@ import AdminStores from "../features/admin/pages/AdminStores";
 import OwnerLayout from "../layouts/OwnerLayout";
 import OwnerDashboard from "../features/owner/pages/OwnerDashboard";
 
+import UserLayout from "../layouts/UserLayout";
+import Stores from "../features/stores/pages/Stores";
+
 export const routes = createBrowserRouter([
     {
         path: "/",
@@ -33,6 +36,20 @@ export const routes = createBrowserRouter([
                 <Profile />
             </ProtectedRoute>
         )
+    },
+    {
+        path: "/stores",
+        element: (
+            <RoleBasedRoute allowedRoles={["USER"]}>
+                <UserLayout />
+            </RoleBasedRoute>
+        ),
+        children: [
+            {
+                index: true,
+                element: <Stores />
+            }
+        ]
     },
     {
         path: "/admin",
