@@ -10,8 +10,12 @@ app.use(morgan("dev"));
 
 import authRouter from "./routes/auth.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import storeRouter from "./routes/store.routes.js";
+import ownerRouter from "./routes/owner.routes.js";
 
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/stores", storeRouter);
+app.use("/api/owner", ownerRouter);
 
 export default app;
