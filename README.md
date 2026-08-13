@@ -2,6 +2,29 @@
 
 A full-stack web application where users can discover registered stores and submit ratings from 1 to 5. The application uses role-based access control to provide different features for System Administrators, Normal Users, and Store Owners.
 
+## Live Demo
+
+🔗 **Live Demo:** [Store Rating Platform](https://store-rate-vts1.onrender.com/)
+
+### Demo Login Credentials
+
+You can use the following accounts to test different user roles.
+
+#### System Administrator
+
+Email: rohit@gmail.com
+Password: rohit123
+
+### Store Owner
+
+Email: virat@gmail.com
+Password: virat123
+
+### Normal User
+
+Email: dhoni@gmail.com
+Password: dhoni123
+
 ## Tech Stack
 
 ### Frontend
