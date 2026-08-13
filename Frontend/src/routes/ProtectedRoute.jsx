@@ -1,4 +1,4 @@
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../features/auth/hooks/useAuth'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 const ProtectedRoute = ({ children }) => {

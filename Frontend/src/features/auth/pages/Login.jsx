@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
 const Login = () => {
-    const { handleLogin, handleChangePassword, loading } = useAuth();
+    const { handleLogin, handleChangePassword, loading, user } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            if (user.role === "admin") {
+                navigate("/admin/dashboard", { replace: true });
+            } else if (user.role === "store_owner") {
+                navigate("/owner/dashboard", { replace: true });
+            }
+        }
+    }, [user, navigate]);
 
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
@@ -120,11 +130,17 @@ const Login = () => {
         if (!validateLogin()) return;
 
         try {
-            await handleLogin({
+            const loggedInUser = await handleLogin({
                 email: loginData.email,
                 password: loginData.password,
             });
-            navigate("/");
+            if (loggedInUser?.role === "admin") {
+                navigate("/admin/dashboard");
+            } else if (loggedInUser?.role === "store_owner") {
+                navigate("/owner/dashboard");
+            } else {
+                navigate("/");
+            }
         } catch (err) {
             setErrors((prev) => ({
                 ...prev,
