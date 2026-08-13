@@ -13,7 +13,7 @@ adminRouter.get("/dashboard",authUser,authorizeRoles("admin"), getAdminDashboard
 adminRouter.post("/users",authUser,authorizeRoles("admin"),validateUser,createUser);
 
 // this api fetches all the users from db
-adminRouter.get("/users",authUser,authorizeRoles("admin"),validateUser,getAllUsers);
+adminRouter.get("/users",authUser,authorizeRoles("admin"),getAllUsers);
 
 // fetches a single user by id from db and ratings if user is store_owner.
 adminRouter.get("/users/:id",authUser,authorizeRoles("admin"),getUserById);

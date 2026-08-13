@@ -26,7 +26,7 @@ export const getOwnerDashboard = async (req, res) => {
 
         // get users who rated the store
         const usersResult = await pool.query(
-            `SELECT u.id, u.username, r.rating 
+            `SELECT u.id, u.username, u.email, r.rating 
              FROM users u 
              JOIN ratings r ON u.id = r.user_id 
              WHERE r.store_id = $1`,

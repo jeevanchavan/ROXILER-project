@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
@@ -9,7 +9,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) {
+        if (!loading && user) {
             const role = (user.role || "").toLowerCase();
             if (role === "admin") {
                 navigate("/admin/dashboard", { replace: true });
@@ -19,7 +19,7 @@ const Login = () => {
                 navigate("/stores", { replace: true });
             }
         }
-    }, [user, navigate]);
+    }, [user, loading, navigate]);
 
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");

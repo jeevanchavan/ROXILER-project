@@ -40,7 +40,12 @@ export const createUser = async (userData) => {
         const response = await api.post("/users", userData);
         return response.data;
     } catch (error) {
-        throw new Error(error.response?.data?.message || "Failed to create user.");
+        const data = error.response?.data;
+        if (data?.errors && Array.isArray(data.errors)) {
+            const errMsgs = data.errors.map((e) => e.msg).join(", ");
+            throw new Error(errMsgs);
+        }
+        throw new Error(data?.message || "Failed to create user.");
     }
 };
 

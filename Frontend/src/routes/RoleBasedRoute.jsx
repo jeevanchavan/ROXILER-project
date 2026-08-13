@@ -23,7 +23,9 @@ const RoleBasedRoute = ({ allowedRoles, children }) => {
       (role) => role.toLowerCase() === userRole
     );
     if (!hasRole) {
-      return <Navigate to="/" replace />;
+      if (userRole === "admin") return <Navigate to="/admin/dashboard" replace />;
+      if (userRole === "store_owner") return <Navigate to="/owner/dashboard" replace />;
+      return <Navigate to="/stores" replace />;
     }
   }
 

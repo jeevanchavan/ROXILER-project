@@ -99,7 +99,7 @@ export const getUserById = async (req, res) => {
                  FROM ratings r
                  JOIN stores s ON r.store_id = s.id
                  WHERE s.owner_id = $1`,
-                [userId]
+                [id]
             );
             averageRating = ratingResult.rows[0].average_rating;
         }

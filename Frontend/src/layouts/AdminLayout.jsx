@@ -6,7 +6,6 @@ const AdminLayout = () => {
   const { user, handleLogout } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const onLogout = async () => {
     try {
@@ -104,37 +103,6 @@ const AdminLayout = () => {
           <Outlet />
         </main>
       </div>
-
-      {/* Profile Modal */}
-      {showProfileModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-white rounded border border-gray-300 max-w-sm w-full p-6">
-            <h2 className="text-lg font-bold mb-4 text-gray-800 pb-2 border-b border-gray-200">
-              Admin Profile
-            </h2>
-            <div className="space-y-2 text-sm text-gray-700 mb-6">
-              <p>
-                <strong className="text-gray-900">Name:</strong> {user?.username || "N/A"}
-              </p>
-              <p>
-                <strong className="text-gray-900">Email:</strong> {user?.email || "N/A"}
-              </p>
-              <p>
-                <strong className="text-gray-900">Address:</strong> {user?.address || "N/A"}
-              </p>
-              <p>
-                <strong className="text-gray-900">Role:</strong> {user?.role || "ADMIN"}
-              </p>
-            </div>
-            <button
-              onClick={() => setShowProfileModal(false)}
-              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 rounded text-sm cursor-pointer"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

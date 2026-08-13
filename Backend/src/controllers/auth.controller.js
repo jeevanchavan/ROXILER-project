@@ -112,7 +112,7 @@ export const getUserProfile = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const user = await pool.query("SELECT id, username, email FROM users WHERE id = $1", [userId]);
+        const user = await pool.query("SELECT id, username, email, address, role FROM users WHERE id = $1", [userId]);
 
         res.status(200).json({
             message: "User profile fetched successfully",

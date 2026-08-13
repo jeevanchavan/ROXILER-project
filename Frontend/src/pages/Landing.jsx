@@ -1,8 +1,23 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../features/auth/hooks/useAuth";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && user) {
+      const role = (user.role || "").toLowerCase();
+      if (role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else if (role === "store_owner") {
+        navigate("/owner/dashboard", { replace: true });
+      } else {
+        navigate("/stores", { replace: true });
+      }
+    }
+  }, [user, loading, navigate]);
 
   return (
     <div className="min-h-screen bg-white text-gray-800 flex flex-col font-sans">

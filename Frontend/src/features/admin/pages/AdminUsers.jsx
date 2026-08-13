@@ -33,10 +33,13 @@ const AdminUsers = () => {
     fetchUsers();
   }, [fetchUsers]);
 
+  const [modalError, setModalError] = useState("");
+
   // Handle Form Change
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setModalError("");
     if (formErrors[name]) {
       setFormErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -81,6 +84,7 @@ const AdminUsers = () => {
   // Submit Add User Form
   const handleAddUserSubmit = async (e) => {
     e.preventDefault();
+    setModalError("");
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -95,8 +99,9 @@ const AdminUsers = () => {
         role: "user",
       });
       setFormErrors({});
+      setModalError("");
     } catch (err) {
-      // Error handled by hook or set locally
+      setModalError(err.message || "Failed to create user.");
     } finally {
       setIsSubmitting(false);
     }
@@ -165,6 +170,7 @@ const AdminUsers = () => {
           onClick={() => {
             setIsModalOpen(true);
             setError("");
+            setModalError("");
           }}
           className="cursor-pointer px-4 py-2"
         >
@@ -342,6 +348,11 @@ const AdminUsers = () => {
         title="Add New User"
       >
         <form onSubmit={handleAddUserSubmit}>
+          {modalError && (
+            <div className="mb-3 p-2 bg-red-100 border border-red-300 text-red-700 text-xs rounded">
+              {modalError}
+            </div>
+          )}
           <Input
             label="Name (Username)"
             id="username"
